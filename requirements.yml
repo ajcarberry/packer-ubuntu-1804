@@ -1,5 +1,5 @@
 ---
 
 - src: https://github.com/ajcarberry/ansible-role-packer-debian
-  version: master
+  version: feature-initial
   name: ajcarberry.packer-debian
