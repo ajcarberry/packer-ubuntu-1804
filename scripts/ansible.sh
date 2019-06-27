@@ -13,4 +13,4 @@ apt -y install ansible
 apt -y install git
 
 # Install Aptitude
-apt-get install aptitude
+apt-get -y install aptitude
