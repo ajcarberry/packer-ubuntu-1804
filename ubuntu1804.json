@@ -1,8 +1,8 @@
 {
   "variables": {
-    "cloud_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
-    "version": "",
-    "profile": "default"
+    "cloud_token": "{{env `VAGRANT_CLOUD_TOKEN` }}",
+    "profile": "default",
+    "version": ""
   },
   "builders": [
     {
@@ -31,7 +31,7 @@
       "run_tags": {
         "Base_AMI_Name": "{{ .SourceAMIName }}",
         "Name": "bake-ubuntu-{{user `version`}}",
-        "Environment": "{{ user `profile` }}",
+        "Environment": "{{user `profile` }}",
         "Version": "{{user `version`}}",
         "Automation": "packer"
       },
@@ -151,17 +151,19 @@
     }
   ],
   "post-processors": [
-    {
-      "type": "vagrant",
-      "output": "builds/ubuntu1804-{{user `version`}}.box",
-      "only": ["virtualbox-iso"]
-    },
-    {
-      "type": "vagrant-cloud",
-      "box_tag": "ajcarberry/ubuntu1804",
-      "version": "{{user `version`}}",
-      "access_token": "{{user `cloud_token`}}",
-      "only": ["virtualbox-iso"]
-    }
+    [
+      {
+        "type": "vagrant",
+        "output": "builds/ubuntu-1804-v{{user `version`}}.box",
+        "only": ["virtualbox-iso"]
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "ajcarberry/ubuntu1804",
+        "version": "{{user `version`}}",
+        "access_token": "{{user `cloud_token`}}",
+        "only": ["virtualbox-iso"]
+      }
+    ]
   ]
 }

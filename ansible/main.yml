@@ -7,20 +7,21 @@
     - ajcarberry.packer-debian
 
   tasks:
-    - apt: "name={{ item }} state=installed"
-      with_items:
-        - git
-        - wget
-        - curl
-        - vim
-        - dkms
-        - dstat
-        - dbus
-        - iftop
-        - tcpdump
-        - screen
-        - rsync
-        - ntp
-        - python-dev
-        - python-pip
-        - unzip
+    - apt:
+        pkg:
+          - git
+          - wget
+          - curl
+          - vim
+          - dkms
+          - dstat
+          - dbus
+          - iftop
+          - tcpdump
+          - screen
+          - rsync
+          - ntp
+          - python-dev
+          - python-pip
+          - unzip
+        state: present
