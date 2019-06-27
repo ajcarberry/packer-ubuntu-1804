@@ -14,3 +14,6 @@ apt -y install git
 
 # Install Aptitude
 apt-get -y install aptitude
+
+# Install Python-Apt
+apt-get -y python-apt
