@@ -7,8 +7,9 @@
     - ajcarberry.packer-debian
 
   tasks:
-    - apt:
-        pkg:
+    - name: Install standalone packages.
+      apt:
+        name:
           - git
           - wget
           - curl
@@ -21,7 +22,6 @@
           - screen
           - rsync
           - ntp
-          - python-dev
           - python-pip
           - unzip
         state: present
