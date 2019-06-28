@@ -154,7 +154,7 @@
     [
       {
         "type": "vagrant",
-        "output": "builds/ubuntu-1804-v{{user `version`}}.box",
+        "output": "builds/ubuntu-1804.box",
         "only": ["virtualbox-iso"]
       },
       {
