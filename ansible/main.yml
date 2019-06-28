@@ -5,6 +5,7 @@
 
   roles:
     - ajcarberry.packer-debian
+    - ajcarberry.role-ansible
 
   tasks:
     - name: Install standalone packages.
