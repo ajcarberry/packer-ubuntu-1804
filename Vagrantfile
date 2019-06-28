@@ -2,24 +2,26 @@
 # vi: set ft=ruby :
 
 Vagrant.configure("2") do |config|
-  config.ssh.insert_key = false
-  config.vm.synced_folder '.', '/vagrant', type: 'nfs'
+  config.vm.box = "file://builds/ubuntu-1804.box"
+  config.vm.define "packerUbuntu" do |virtualbox|
+  end
 
-  # VirtualBox.
-  config.vm.define "virtualbox" do |virtualbox|
-    virtualbox.vm.hostname = "virtualbox-ubuntu1804"
-    virtualbox.vm.box = "file://builds/virtualbox-ubuntu1804.box"
-    virtualbox.vm.network :private_network, ip: "172.16.3.2"
+  config.vm.network "private_network", ip: "172.16.3.2"
 
-    config.vm.provider :virtualbox do |v|
-      v.gui = false
-      v.memory = 1024
-      v.cpus = 1
-      v.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
-      v.customize ["modifyvm", :id, "--ioapic", "on"]
-    end
+  config.vm.provider :virtualbox do |vb|
+    vb.gui = false
+    vb.name = "packerUbuntu"
+    vb.memory = 1024
+    vb.cpus = 1
+    vb.customize ["modifyvm", :id, "--natdnshostresolver1", "on"]
+    vb.customize ["modifyvm", :id, "--ioapic", "on"]
+  end
 
     config.vm.provision "shell", inline: "echo Hello, World"
   end
 
+  # Enable provisioning with Ansible
+  config.vm.provision "ansible" do |ansible|
+    ansible.playbook = "ansible/main.yml"
+  end
 end
