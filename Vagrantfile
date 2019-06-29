@@ -6,7 +6,7 @@ Vagrant.configure("2") do |config|
   config.vm.define "packerUbuntu" do |virtualbox|
   end
 
-  config.vm.network "private_network", ip: "172.16.3.2"
+  config.vm.network "private_network", ip: "172.16.1.2"
 
   config.vm.provider :virtualbox do |vb|
     vb.gui = false
@@ -17,11 +17,9 @@ Vagrant.configure("2") do |config|
     vb.customize ["modifyvm", :id, "--ioapic", "on"]
   end
 
-    config.vm.provision "shell", inline: "echo Hello, World"
-  end
-
   # Enable provisioning with Ansible
   config.vm.provision "ansible" do |ansible|
+    ansible.galaxy_role_file = "requirements.yml"
     ansible.playbook = "ansible/main.yml"
   end
 end
